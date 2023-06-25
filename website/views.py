@@ -9,3 +9,8 @@ def home():
 @views.route('/blog')
 def blog():
     return render_template("blog.html")
+
+@views.route('/text_analyzer')
+def text_analyzer():
+    return render_template("text_analyzer.html")
+

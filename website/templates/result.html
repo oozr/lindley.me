@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Result{% endblock %} 
+
+{% block content %}
+
+<head>
+    <title>Text Analyzer Results</title>
+</head>
+<body>
+    <h1>Text Analyzer Results</h1>
+    <p>The Coleman-Liau index score is {{score}}.</p>
+    <p>This means the text is suitable for students in grade {{grade}}.</p>
+</body>
+
+{% endblock %}

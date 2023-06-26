@@ -1,6 +1,19 @@
 {% extends "base.html" %}
-{% block title %}Blog{% endblock %} 
+{% block title %}Text Analyzer{% endblock %} 
 
 {% block content %}
+
+<head>
+    <title>Text Analyzer</title>
+</head>
+<body>
+    <h1>Text Analyzer</h1>
+    <form action="/text_analyzer" method="post">
+        <textarea name="text" rows="10" cols="50"></textarea>
+
+
+        <input type="submit" value="Analyze">
+    </form>
+</body>
 
 {% endblock %}

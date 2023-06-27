@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}CEFR Result{% endblock %} 
+
+{% block content %}
+
+<head>
+    <title>CEFR Result</title>
+</head>
+<body>
+    <h1>CEFR Result</h1>
+    <p>This CEFR analysis was done for {{language}}.</p>
+    <p>Based on analysing the Flesch-Kincaid grade level, the CEFR grade is {{cefr}}.</p>
+</body>
+
+{% endblock %}

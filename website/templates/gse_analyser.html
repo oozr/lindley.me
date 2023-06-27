@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}GSE Analyser{% endblock %} 
+
+{% block content %}
+
+<head>
+    <title>GSE Analyser</title>
+</head>
+<body>
+    <h1>GSE Analyser</h1>
+    <p>The most advanced text analyser on the web. Please insert your text in English. For other languages use the 'CEFR Analyzer'.</p>
+    <form action="/gse_analyser" method="post">
+        <textarea name="text" rows="10" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Analyse">
+    </form>
+</body>
+
+{% endblock %}

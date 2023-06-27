@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}CEFR Analyzer{% endblock %} 
+
+{% block content %}
+
+<head>
+    <title>CEFR Analyzer</title>
+</head>
+<body>
+    <h1>CEFR Analyser</h1>
+    <p>Welcome to the CEFR text analyser. Depending on which language you select our algorithm takes into account independent research done into each of the languages to take into account their unique characteristics. For English, please use the 'GSE analyser'.</p>
+    <form action="/cefr_analyser" method="post">
+        <label for="cars">Choose a language:</label>
+            <select name="language" id="language">
+            <option value="Arabic">Arabic</option>
+            <option value="German">German</option>
+            <option value="Italian">Italian</option>
+            <option value="Spanish">Spanish</option>
+            </select> 
+        </select>
+        <br>
+        <textarea name="text" rows="10" cols="50"></textarea>
+        <br>
+        <input type="submit" value="Analyse">
+    </form>
+</body>
+
+{% endblock %}

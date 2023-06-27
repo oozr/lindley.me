@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Result{% endblock %} 
+
+{% block content %}
+
+<head>
+    <title>GSE Result</title>
+</head>
+<body>
+    <h1>GSE Result</h1>
+    <p>The Coleman-Liau index score is {{score}}. This means the text is suitable for students in grade {{grade}}.</p>
+    <p>Based on analysing the Flesch-Kincaid grade level, the CEFR grade is {{cefr}}.</p>
+</body>
+
+{% endblock %}

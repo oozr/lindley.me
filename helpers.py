@@ -1,16 +1,4 @@
-import textstat
-
-def calculate_coleman_liau_index(text):
-    # Add the Coleman-Liau index calculation code here
-    char_count = len([char for char in text if char.isalnum()])
-    word_count = len(text.split())
-    sentence_count = len([char for char in text if char in ['.', '?', '!']])
-    L = (char_count / word_count) * 100
-    S = (sentence_count / word_count) * 100
-    score = round(0.0588 * L - 0.296 * S - 15.8, 2)
-
-    return score
-
+"""
 def estimate_cefr_level(text):
     # calculate the Flesch-Kincaid Grade Level of the text
     fkg = textstat.flesch_kincaid_grade(text)
@@ -25,5 +13,70 @@ def estimate_cefr_level(text):
         cefr = "C1"
     else:
         cefr = "C2"
+    return cefr
+"""
+
+def estimate_cefr_level(index, level):
+    if index == "Gulpease":
+        if level >= 100:
+            cefr = "<A1"
+        elif 100 > level >= 85:
+            cefr = "A1"
+        elif 85 > level >= 65:
+            cefr = "A2"
+        elif 65 > level >= 50:
+            cefr = "B1"
+        elif 50 > level >= 40:
+            cefr = "B2"
+        elif 40 > level >= 30:
+            cefr = "C1"
+        else:
+            cefr = "C2"
+    elif index == "Osman":
+        if level >= 100:
+            cefr = "<A1"
+        elif 100 > level >= 90:
+            cefr = "A1"
+        elif 90 > level >= 80:
+            cefr = "A2"
+        elif 80 > level >= 70:
+            cefr = "B1"
+        elif 70 > level >= 60:
+            cefr = "B2"
+        elif 60 > level >= 50:
+            cefr = "C1"
+        else:
+            cefr = "C2"
+    elif index == "Fernandez-Huerta":
+        if level >= 100:
+            cefr = "<A1"
+        elif 100 > level >= 95:
+            cefr = "A1"
+        elif 95 > level >= 90:
+            cefr = "A2"
+        elif 90 > level >= 80:
+            cefr = "B1"
+        elif 80 > level >= 70:
+            cefr = "B2"
+        elif 70 > level >= 60:
+            cefr = "C1"
+        else:
+            cefr = "C2"
+    elif index == "Wiener Sachtextformel":
+        if 0 <= level < 1:
+            cefr = "<A1"
+        elif 1 <= level < 3:
+            cefr = "A1"
+        elif 3 <= level < 6:
+            cefr = "A2"
+        elif 6 <= level < 9:
+            cefr = "B1"
+        elif 9 <= level < 12:
+            cefr = "B2"
+        elif 13 <= level < 15:
+            cefr = "C1"
+        else:
+            cefr = "C2"
     
     return cefr
+    

@@ -7,4 +7,4 @@ MarkupSafe==1.1.1
 Werkzeug==1.0.1
 textstat==0.7.3
 spacy==v3.5
-en_core_web_sm
+python -m spacy download en_core_web_sm

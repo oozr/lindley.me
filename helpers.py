@@ -17,6 +17,21 @@ def estimate_cefr_level(text):
 """
 
 def estimate_cefr_level(index, level):
+    if index == "Flesch-Kincaid":
+        if level >= 100:
+            cefr = "<A1"
+        elif 100 > level >= 90:
+            cefr = "A1"
+        elif 90 > level >= 80:
+            cefr = "A2"
+        elif 80 > level >= 70:
+            cefr = "B1"
+        elif 70 > level >= 60:
+            cefr = "B2"
+        elif 60 > level >= 50:
+            cefr = "C1"
+        else:
+            cefr = "C2"
     if index == "Gulpease":
         if level >= 100:
             cefr = "<A1"

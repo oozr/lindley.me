@@ -16,13 +16,17 @@ def blog():
 @views.route('/gse_analyser', methods = ["GET", "POST"])
 def gse_analyser():
     if request.method == "POST":
-        #only load the lemmatizer part of the pipeline for quicker load time
+                #only load the lemmatizer part of the pipeline for quicker load time
         nlp = spacy.load("en_core_web_sm")   
         data = request.form['text']
+        level = textstat.flesch_reading_ease(data)
+        index = "Flesch-Kincaid"
+        cefr = estimate_cefr_level(index, level)
         sentence = nlp(data)
         for word in sentence:
             print(word.lemma_)
-        return render_template('gse_result.html')  
+            #fetch score of each word to sql table
+        return render_template('gse_result.html', index = index, level=level, cefr = cefr)  
     #Otherwise a GET request will just render the HTML
     return render_template("gse_analyser.html")
 
@@ -35,6 +39,9 @@ def cefr_analyser():
         if language == "Arabic":
             index = "Osman"
             level = textstat.osman(data)
+        elif language == "English":
+            index = "Flesch-Kincaid"
+            level = textstat.flesch_reading_ease(data)
         elif language == "German":
             index = "Wiener Sachtextformel"
             variant = 1

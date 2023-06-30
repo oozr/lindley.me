@@ -16,7 +16,8 @@ def blog():
 @views.route('/gse_analyser', methods = ["GET", "POST"])
 def gse_analyser():
     if request.method == "POST":
-        nlp = {"en_core_web_sm": spacy.load("en_core_web_sm"),}      
+        #only load the lemmatizer part of the pipeline for quicker load time
+        nlp = spacy.load("en_core_web_sm")   
         data = request.form['text']
         sentence = nlp(data)
         for word in sentence:

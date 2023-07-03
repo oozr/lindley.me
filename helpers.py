@@ -1,3 +1,4 @@
+
 """
 def estimate_cefr_level(text):
     # calculate the Flesch-Kincaid Grade Level of the text
@@ -15,6 +16,42 @@ def estimate_cefr_level(text):
         cefr = "C2"
     return cefr
 """
+def estimate_gse_level(level, average_gse):
+    #make sure there aren't any values over 100
+    if level >= 100:
+        level = 100
+    #convert klish reading level numeric value to a GSE score. THIS SHOULD ALLIGN WITH CEFR VALUES TO BE CORRECT
+    gse_reading_index = ((100 - level) / 100) * 80 + 10
+    if average_gse >=50:
+        average_gse = 50
+    #turn 10 to 10, 25 to 50, 40 to 90. The below formula works is i'm getting a nice spread between 10 and 50. If frequently more than 40 then i need to increase the max and 30 by the same amount
+    improved_average_gse = ((average_gse-10)/40*100)/100*80+10
+    #calculate overall gse level by weighting reading level and gse vocabulary score 2:1 (DIVIDE BY 4 BECAUSE IT'S DIVIDING THE AVAERAGE (/2) BY 2)
+    overall_gse = gse_reading_index + ((improved_average_gse - gse_reading_index) / 4)
+    return overall_gse
+
+def convert_cefr_to_gse(overall_gse):
+        if 10 <= overall_gse <= 21:
+            cefr = "<A1"
+        elif 22 <= overall_gse <= 29:
+            cefr = "A1"
+        elif 30 <= overall_gse <= 35:
+            cefr = "A2"
+        elif 36 <= overall_gse <= 42:
+            cefr = "A2+"
+        elif 43 <= overall_gse <= 50:
+            cefr = "B1"
+        elif 51 <= overall_gse <= 58:
+            cefr = "B1+"
+        elif 59 <= overall_gse <= 66:
+            cefr = "B2"
+        elif 67 <= overall_gse <= 75:
+            cefr = "B2+"
+        elif 76 <= overall_gse <= 85:
+            cefr = "C1"
+        else:
+            cefr = "C2"
+        return cefr
 
 def estimate_cefr_level(index, level):
     if index == "Flesch-Kincaid":

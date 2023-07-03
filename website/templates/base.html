@@ -11,7 +11,7 @@
   </head>
   <body>
     <!-- create a navbar using bootstrap, this one makes it suitable for mobiles -->
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <button
         class="navbar-toggler"
         type="button"
@@ -21,15 +21,64 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <!-- define the items in the collapsable navbar-->
+      <div>
+        <a class="navbar-brand" href="/">
+          <img src="/static/cefr_logo.png">
+        </a>
+      </div>
+            
       <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav">
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/blog">Blog</a>
-          <a class="nav-item nav-link" id="logout" href="/gse_analyser">GSE Analyser</a>
-          <a class="nav-item nav-link" id="logout" href="/cefr_analyser">CEFR Analyser</a>
+        <div class="navbar-nav" text-align="center">
+            <a class="nav-item nav-link" id="home" href="/">Home</a>
+            <a class="nav-item nav-link" id="logout" href="/blog">Blog</a>
+            <a class="nav-item nav-link" id="logout" href="/gse_analyser">GSE Analyser</a>
+            <a class="nav-item nav-link" id="logout" href="/cefr_analyser">CEFR Analyser</a>
         </div>
       </div>
     </nav>
+    
+    <style>
+      .btn-pastel-blue {
+        background-color: #a6dcef;
+        color: #fff;
+      }
+    
+      .btn-pastel-green {
+        background-color: #b7e4c7;
+        color: #fff;
+      }
+    
+      .btn-pastel-pink {
+        background-color: #f8b6c5;
+        color: #fff;
+      }
+
+
+      .btn-pastel-yellow {
+          background-color: #fff4a3;
+          color: #fff;
+      }
+    
+      .btn-pastel-orange {
+          background-color: #ffdac9;
+          color: #fff;
+      }
+    
+      .btn-pastel-purple {
+          background-color: #cbb4d4;
+          color: #fff;
+      }
+    
+      .btn-pastel-red {
+          background-color: #ffb6b9;
+          color: #fff;
+      }
+    
+      .btn-pastel-gray {
+          background-color: #eaeaea;
+          color: #fff;
+      }
+    </style>
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==

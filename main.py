@@ -1,5 +1,6 @@
 from website import create_app
 import os
+from flask_flatpages import FlatPages
 
 app = create_app()
 

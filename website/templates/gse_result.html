@@ -4,15 +4,53 @@
 {% block content %}
 
 <head>
-    <title>GSE Result</title>
+    <title>Results</title>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
-<body>
-    <h1>GSE Result</h1>
-    <p>The regional index used to calculate the level of your text is the {{index}} index.<p>
-    <p>The level of your text is {{level}}.</p>
-    <p>This correlates to CEFR level {{cefr}}.</p>
-    <br>
-    <p>To find out how this score was calculated, please visit the blog.</p>
+
+<body>  
+    <div class="container-fluid mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">GSE Score</h5>
+                        <hr>
+                        <p class="card-text">The overall GSE 10-90 level of this text is:</p>
+                        <h2 class="card-text text-center" id="gse-score">{{overall_gse}}</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">CEFR Score</h5>
+                        <hr>
+                        <p class="card-text">This correlates to a CEFR score of:</p>
+                        <h3 class="card-text text-center" id="cefr-score">{{overall_cefr}}</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px;">
+                    <div class="card-body">
+                        <h5 class="card-title">Words not found</h5>
+                        <hr>
+                        <p>{{ words_not_found }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!--
+    <script>
+        $(document).ready(function () {
+            $("#gse-score").hide()
+            $("#gse-score").fadeIn(2000);
+        });
+    </script>
+-->
+
 </body>
 
 {% endblock %}

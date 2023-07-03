@@ -7,13 +7,23 @@
     <title>GSE Analyser</title>
 </head>
 <body>
-    <h1>GSE Analyser</h1>
-    <p>The most advanced text analyser on the web. Please insert your text in English. For other languages use the 'CEFR Analyzer'.</p>
-    <form action="/gse_analyser" method="post">
-        <textarea name="text" rows="10" cols="50"></textarea>
-        <br>
-        <input type="submit" value="Analyse">
-    </form>
+    <br>
+    <div class="container-fluid p-0 m-0">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px;">
+                    <h1 class="card-title">GSE Analyser</h1>
+                    <p class="card-text">The most advanced text analyser on the web. Please insert your text in English. For other languages use the 'CEFR Analyzer'.</p>
+                    <form action="/gse_analyser" method="post">
+                        <textarea name="text" rows="10" cols="50" class="form-control"></textarea>
+
+
+                        <input type="submit" value="Analyse" class="btn btn-pastel-green">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 {% endblock %}

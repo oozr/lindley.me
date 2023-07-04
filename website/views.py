@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from helpers import estimate_cefr_level, estimate_gse_level, convert_cefr_to_gse
+from helpers import estimate_cefr_level, estimate_gse_level, convert_cefr_to_gse, clean_words_not_found
 import sqlite3
 import textstat
 import spacy
@@ -47,12 +47,16 @@ def gse_analyser():
             else:
                 words_not_found.append(word)
                 continue
-        #This is always too low because of the high frequency of low ranked words
-        average_gse = gse_total/number_of_words
+        if number_of_words == 0:
+            return render_template("gse_analyser.html")
+        else:
+            #This is always too low because of the high frequency of low ranked words
+            average_gse = gse_total/number_of_words
         conn.close()
+        none_words = clean_words_not_found(words_not_found) 
         overall_gse = round(estimate_gse_level(level, average_gse))
         overall_cefr = convert_cefr_to_gse(overall_gse)
-        return render_template('gse_result.html', overall_gse = overall_gse, overall_cefr = overall_cefr, words_not_found = words_not_found)  
+        return render_template('gse_result.html', overall_gse = overall_gse, overall_cefr = overall_cefr, none_words = none_words)  
     #Otherwise a GET request will just render the HTML
     return render_template("gse_analyser.html")
 
@@ -61,24 +65,26 @@ def cefr_analyser():
     if request.method == "POST":
         data = request.form['text']
         language = request.form['language']
-        # Calculate the level using the regional varient of text analyser
-        if language == "Arabic":
-            index = "Osman"
-            level = textstat.osman(data)
-        elif language == "English":
-            index = "Flesch-Kincaid"
-            level = textstat.flesch_reading_ease(data)
-        elif language == "German":
-            index = "Wiener Sachtextformel"
-            variant = 1
-            level = textstat.wiener_sachtextformel(data, variant)
-        elif language == "Italian":
-            index = "Gulpease"
-            level = textstat.gulpease_index(data)
-        elif language == "Spanish":
-            index = "Fernandez-Huerta"
-            level = textstat.fernandez_huerta(data)
-        cefr = estimate_cefr_level(index, level)
-        return render_template('cefr_result.html', cefr=cefr, language=language, index=index, level=level)  
+        for i in data:
+            if i.isalnum():    
+                # Calculate the level using the regional varient of text analyser
+                if language == "Arabic":
+                    index = "Osman"
+                    level = textstat.osman(data)
+                elif language == "English":
+                    index = "Flesch-Kincaid"
+                    level = textstat.flesch_reading_ease(data)
+                elif language == "German":
+                    index = "Wiener Sachtextformel"
+                    variant = 1
+                    level = textstat.wiener_sachtextformel(data, variant)
+                elif language == "Italian":
+                    index = "Gulpease"
+                    level = textstat.gulpease_index(data)
+                elif language == "Spanish":
+                    index = "Fernandez-Huerta"
+                    level = textstat.fernandez_huerta(data)
+                cefr = estimate_cefr_level(index, level)
+                return render_template('cefr_result.html', cefr=cefr, language=language, index=index, level=level)  
     #Otherwise a GET request will just render the HTML
     return render_template("cefr_analyser.html")

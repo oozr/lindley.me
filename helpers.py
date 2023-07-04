@@ -12,6 +12,14 @@ def estimate_gse_level(level, average_gse):
     overall_gse = gse_reading_index + ((improved_average_gse - gse_reading_index) / 4)
     return overall_gse
 
+def clean_words_not_found(words_not_found):
+    clean_list = ""
+    for x in range(len(words_not_found)):
+        clean_list = clean_list + " " + str(words_not_found[x])
+    print(clean_list)
+    return clean_list
+
+
 def convert_cefr_to_gse(overall_gse):
         if 10 <= overall_gse <= 21:
             cefr = "<A1"

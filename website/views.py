@@ -24,35 +24,31 @@ def gse_analyser():
         nlp = spacy.load("en_core_web_sm")   
         data = request.form['text']
         level = textstat.flesch_reading_ease(data)
-        index = "Flesch-Kincaid"
-        cefr = estimate_cefr_level(index, level)
         sentence = nlp(data) 
-        print(f"the sentence is {sentence}")
+        #initiate lists
         gse_total = 0
         number_of_words = 0
         average_gse = 0
         words_not_found = []
+        #iterate through text
         for word in sentence:
             #should i open this before the for loop?
             lemma = word.lemma_
-            print(lemma)
             #can I not do this in one command?
             db.execute("SELECT link_table_id FROM vocabulary_table WHERE word=?", [lemma])
             result = db.fetchone()
             if result:
                 id = db.execute("SELECT link_table_id FROM vocabulary_table WHERE word=?", [lemma])
                 id_value = str(id.fetchall()[0][0])
-                print(f"the id_value is {id_value}")
                 word_score = db.execute("SELECT gse FROM link_table WHERE id=?",[id_value])
                 word_score_value = str(word_score.fetchall()[0][0])
-                print(f"the word_score is {word_score_value}")
                 gse_total = gse_total + int(word_score_value)
                 number_of_words += 1
             else:
                 words_not_found.append(word)
                 continue
-            average_gse = gse_total/number_of_words
-        print(f"The average GSE score for this text is:{average_gse}")
+        #This is always too low because of the high frequency of low ranked words
+        average_gse = gse_total/number_of_words
         conn.close()
         overall_gse = round(estimate_gse_level(level, average_gse))
         overall_cefr = convert_cefr_to_gse(overall_gse)

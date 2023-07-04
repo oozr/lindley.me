@@ -1,21 +1,3 @@
-
-"""
-def estimate_cefr_level(text):
-    # calculate the Flesch-Kincaid Grade Level of the text
-    fkg = textstat.flesch_kincaid_grade(text)
-    # convert the Flesch-Kincaid Grade Level to a CEFR level using the CEFR scale
-    if fkg <= 5:
-        cefr = "A2"
-    elif fkg <= 6:
-        cefr = "B1"
-    elif fkg <= 7:
-        cefr = "B2"
-    elif fkg <= 8:
-        cefr = "C1"
-    else:
-        cefr = "C2"
-    return cefr
-"""
 def estimate_gse_level(level, average_gse):
     #make sure there aren't any values over 100
     if level >= 100:

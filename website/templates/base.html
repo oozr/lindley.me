@@ -11,6 +11,7 @@
   </head>
   <body>
     <!-- create a navbar using bootstrap, this one makes it suitable for mobiles -->
+    
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
       <button
         class="navbar-toggler"
@@ -35,8 +36,14 @@
             <a class="nav-item nav-link" id="logout" href="/cefr_analyser">CEFR Analyser</a>
         </div>
       </div>
+      <style>
+        .navbar {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+      </style>
     </nav>
-    
+        
     <style>
       .btn-pastel-blue {
         background-color: #a6dcef;
@@ -80,24 +87,6 @@
       }
     </style>
 
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
-
     <div class="container">{% block content %} {% endblock %}</div>
     <!-- import javascript -->
     <script
@@ -115,18 +104,5 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
-
-{% block javascript %}
-    <script type="text/javascript">
-      function deleteNote(noteId) {
-  fetch("/delete-note", {
-    method: "POST",
-    body: JSON.stringify({ noteId: noteId }),
-  }).then((_res) => {
-    window.location.href = "/";
-  });
-  }
-</script>
-{% endblock %}
   </body>
 </html>

@@ -1,3 +1,8 @@
+import string
+import spacy
+nlp = spacy.load('en_core_web_sm')
+
+
 def estimate_gse_level(level, average_gse):
     #make sure there aren't any values over 100
     if level >= 100:
@@ -13,12 +18,15 @@ def estimate_gse_level(level, average_gse):
     return overall_gse
 
 def clean_words_not_found(words_not_found):
-    clean_list = ""
-    for x in range(len(words_not_found)):
-        clean_list = clean_list + " " + str(words_not_found[x])
-    print(clean_list)
-    return clean_list
-
+    no_punct = [str(word).translate(str.maketrans('', '', string.punctuation + string.digits + string.whitespace + "★👍")) for word in words_not_found]
+    #remove proper nouns
+    no_proper_nouns = [token.text for token in nlp(" ".join(no_punct)) if not token.pos_ == 'PROPN']
+    #remove duplicate words
+    no_duplicates = list(set(no_proper_nouns))
+    #remove empty strings
+    no_duplicates = [word for word in no_duplicates if word]
+    clean_output = ', '.join(no_duplicates)
+    return clean_output
 
 def convert_cefr_to_gse(overall_gse):
         if 10 <= overall_gse <= 21:

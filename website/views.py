@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request
-from helpers import estimate_cefr_level, estimate_gse_level, convert_cefr_to_gse, clean_words_not_found
+from helpers import estimate_cefr_level, estimate_gse_level, convert_cefr_to_gse, clean_words_not_found, words_to_learn
 import sqlite3
 import textstat
 import spacy
@@ -30,6 +30,7 @@ def gse_analyser():
         number_of_words = 0
         average_gse = 0
         words_not_found = []
+        found_words = {}
         #iterate through text
         for word in sentence:
             #should i open this before the for loop?
@@ -42,6 +43,7 @@ def gse_analyser():
                 id_value = str(id.fetchall()[0][0])
                 word_score = db.execute("SELECT gse FROM link_table WHERE id=?",[id_value])
                 word_score_value = str(word_score.fetchall()[0][0])
+                found_words[word_score_value] = lemma
                 gse_total = gse_total + int(word_score_value)
                 number_of_words += 1
             else:
@@ -53,10 +55,11 @@ def gse_analyser():
             #This is always too low because of the high frequency of low ranked words
             average_gse = gse_total/number_of_words
         conn.close()
-        none_words = clean_words_not_found(words_not_found) 
+        none_words = clean_words_not_found(words_not_found)
+        learn_words = words_to_learn(found_words) 
         overall_gse = round(estimate_gse_level(level, average_gse))
         overall_cefr = convert_cefr_to_gse(overall_gse)
-        return render_template('gse_result.html', overall_gse = overall_gse, overall_cefr = overall_cefr, none_words = none_words)  
+        return render_template('gse_result.html', overall_gse = overall_gse, overall_cefr = overall_cefr, none_words = none_words, learn_words = learn_words)  
     #Otherwise a GET request will just render the HTML
     return render_template("gse_analyser.html")
 

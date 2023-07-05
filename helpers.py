@@ -25,8 +25,25 @@ def clean_words_not_found(words_not_found):
     no_duplicates = list(set(no_proper_nouns))
     #remove empty strings
     no_duplicates = [word for word in no_duplicates if word]
-    clean_output = ', '.join(no_duplicates)
+    #remove more empty space
+
+    #remove nationalities
+
+    #remove numbers
+    
+    clean_output = ' '.join(no_duplicates)
     return clean_output
+
+def words_to_learn(found_words):
+    #order the words by GSE score, left to right
+    ordered_words = dict(sorted(found_words.items(), key=lambda x: int(x[0])))
+    new_list = []
+    count = len(ordered_words)
+    for i in range(len(ordered_words)):
+        new_list.append(ordered_words.popitem())
+        if i == 9:
+            break
+    return new_list
 
 def convert_cefr_to_gse(overall_gse):
         if 10 <= overall_gse <= 21:

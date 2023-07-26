@@ -1,149 +1,101 @@
 import string
 import spacy
-nlp = spacy.load('en_core_web_sm')
+import textstat
+
+class GSELevelEstimator:
+    def __init__(self):
+        pass
+
+    def estimate_gse_level(self, level, average_gse):
+        #make sure there aren't any values over 100 to simplify the conversion
+        if level >= 100:
+            level = 100
+        #convert klish reading level numeric value to a GSE score. THIS SHOULD ALLIGN WITH CEFR VALUES TO BE CORRECT
+        gse_reading_index = ((100 - level) / 100) * 80 + 10
+        #This is a manual fix for now, as scores tend to be less than 50. NEXT STEP IS TO REMOVE STOP WORDS
+        if average_gse >=50:
+            average_gse = 50
+        #turn 10 to 10, 25 to 50, 40 to 90. The below formula works is i'm getting a nice spread between 10 and 50. If frequently more than 40 then i need to increase the max and 30 by the same amount
+        improved_average_gse = ((average_gse-10)/40*100)/100*80+10
+        #calculate overall gse level by weighting reading level and gse vocabulary score 2:1 (DIVIDE BY 4 BECAUSE IT'S DIVIDING THE AVAERAGE (/2) BY 2)
+        overall_gse = gse_reading_index + ((improved_average_gse - gse_reading_index) / 4)
+        return overall_gse
 
 
-def estimate_gse_level(level, average_gse):
-    #make sure there aren't any values over 100
-    if level >= 100:
-        level = 100
-    #convert klish reading level numeric value to a GSE score. THIS SHOULD ALLIGN WITH CEFR VALUES TO BE CORRECT
-    gse_reading_index = ((100 - level) / 100) * 80 + 10
-    if average_gse >=50:
-        average_gse = 50
-    #turn 10 to 10, 25 to 50, 40 to 90. The below formula works is i'm getting a nice spread between 10 and 50. If frequently more than 40 then i need to increase the max and 30 by the same amount
-    improved_average_gse = ((average_gse-10)/40*100)/100*80+10
-    #calculate overall gse level by weighting reading level and gse vocabulary score 2:1 (DIVIDE BY 4 BECAUSE IT'S DIVIDING THE AVAERAGE (/2) BY 2)
-    overall_gse = gse_reading_index + ((improved_average_gse - gse_reading_index) / 4)
-    return overall_gse
+class WordProcessor:
+    def __init__(self):
+        self.nlp = spacy.load('en_core_web_sm')
 
-def clean_words_not_found(words_not_found):
-    no_punct = [str(word).translate(str.maketrans('', '', string.punctuation + string.digits + string.whitespace + "★👍")) for word in words_not_found]
-    #remove proper nouns
-    no_proper_nouns = [token.text for token in nlp(" ".join(no_punct)) if not token.pos_ == 'PROPN']
-    #remove duplicate words
-    no_duplicates = list(set(no_proper_nouns))
-    #remove empty strings
-    no_duplicates = [word for word in no_duplicates if word]
-    #remove more empty space
+    def clean_words_not_found(self, words_not_found):
+        # Convert each token to a string
+        words_as_strings = [word.text for word in words_not_found]
+        # Remove punctuation and special characters from each word
+        no_punct = [word.translate(str.maketrans('', '', string.punctuation + "★👍")) for word in words_as_strings]
+        # Remove proper nouns
+        no_proper_nouns = [word for word in no_punct if not any(token.pos_ == 'PROPN' for token in self.nlp(word))]
+        # Remove duplicate words
+        no_duplicates = list(set(no_proper_nouns))
+        cleaned_output = ' '.join(no_duplicates)
+        # Return intermediate results as a tuple
+        return cleaned_output
 
-    #remove nationalities
+    def words_to_learn(self, found_words):
+        #order the dictionary found_words by GSE score, left to right into a new list, max 10 words
+        ordered_words = dict(sorted(found_words.items(), key=lambda x: int(x[0])))
+        new_list = []
+        for i in range(len(ordered_words)):
+            new_list.append(ordered_words.popitem())
+            if i == 9:
+                break
+        return new_list
 
-    #remove numbers
-    
-    clean_output = ' '.join(no_duplicates)
-    return clean_output
 
-def words_to_learn(found_words):
-    #order the words by GSE score, left to right
-    ordered_words = dict(sorted(found_words.items(), key=lambda x: int(x[0])))
-    new_list = []
-    count = len(ordered_words)
-    for i in range(len(ordered_words)):
-        new_list.append(ordered_words.popitem())
-        if i == 9:
-            break
-    return new_list
+class CEFRConverter:
+    def __init__(self):
+        # Define the conversion ranges and mappings for different indices
+        self.conversion_ranges = {
+            "GSE_CEFR": [(84, "C2"), (75, "C1"), (66, "B2+"), (58, "B2"), (50, "B1+"), (42, "B1"), (35, "A2+"), (29, "A2"), (21, "A1"), (0, "<A1")],
+            "Flesch-Kincaid": [(100, "<A1"), (90, "A1"), (80, "A2"), (70, "B1"), (60, "B2"), (50, "C1"), (0, "C2")],
+            "Gulpease": [(100, "<A1"), (85, "A1"), (65, "A2"), (50, "B1"), (40, "B2"), (30, "C1"), (0, "C2")],
+            "Osman": [(100, "<A1"), (90, "A1"), (80, "A2"), (70, "B1"), (60, "B2"), (50, "C1"), (0, "C2")],
+            "Fernandez-Huerta": [(100, "<A1"), (95, "A1"), (90, "A2"), (80, "B1"), (70, "B2"), (60, "C1"), (0, "C2")],
+            "Wiener Sachtextformel": [(100, "<A1"), (1, "A1"), (3, "A2"), (6, "B1"), (9, "B2"), (12, "C1"), (0, "C2")]
+        }
 
-def convert_cefr_to_gse(overall_gse):
-        if 10 <= overall_gse <= 21:
-            cefr = "<A1"
-        elif 22 <= overall_gse <= 29:
-            cefr = "A1"
-        elif 30 <= overall_gse <= 35:
-            cefr = "A2"
-        elif 36 <= overall_gse <= 42:
-            cefr = "A2+"
-        elif 43 <= overall_gse <= 50:
-            cefr = "B1"
-        elif 51 <= overall_gse <= 58:
-            cefr = "B1+"
-        elif 59 <= overall_gse <= 66:
-            cefr = "B2"
-        elif 67 <= overall_gse <= 75:
-            cefr = "B2+"
-        elif 76 <= overall_gse <= 85:
-            cefr = "C1"
+    def convert_to_cefr(self, level, index):
+        cefr = None
+        if index in self.conversion_ranges:
+            for x, y in self.conversion_ranges[index]:
+                if level >= x:
+                    cefr = y
+                    break
+            else:
+                cefr = "C2"  # If level is lower than 0 (lowest score in the conversion range for all except GSE_CEFR which is bounded)
         else:
-            cefr = "C2"
+            cefr = "N/A"  # Handle invalid index
+
         return cefr
-
-def estimate_cefr_level(index, level):
-    if index == "Flesch-Kincaid":
-        if level >= 100:
-            cefr = "<A1"
-        elif 100 > level >= 90:
-            cefr = "A1"
-        elif 90 > level >= 80:
-            cefr = "A2"
-        elif 80 > level >= 70:
-            cefr = "B1"
-        elif 70 > level >= 60:
-            cefr = "B2"
-        elif 60 > level >= 50:
-            cefr = "C1"
-        else:
-            cefr = "C2"
-    if index == "Gulpease":
-        if level >= 100:
-            cefr = "<A1"
-        elif 100 > level >= 85:
-            cefr = "A1"
-        elif 85 > level >= 65:
-            cefr = "A2"
-        elif 65 > level >= 50:
-            cefr = "B1"
-        elif 50 > level >= 40:
-            cefr = "B2"
-        elif 40 > level >= 30:
-            cefr = "C1"
-        else:
-            cefr = "C2"
-    elif index == "Osman":
-        if level >= 100:
-            cefr = "<A1"
-        elif 100 > level >= 90:
-            cefr = "A1"
-        elif 90 > level >= 80:
-            cefr = "A2"
-        elif 80 > level >= 70:
-            cefr = "B1"
-        elif 70 > level >= 60:
-            cefr = "B2"
-        elif 60 > level >= 50:
-            cefr = "C1"
-        else:
-            cefr = "C2"
-    elif index == "Fernandez-Huerta":
-        if level >= 100:
-            cefr = "<A1"
-        elif 100 > level >= 95:
-            cefr = "A1"
-        elif 95 > level >= 90:
-            cefr = "A2"
-        elif 90 > level >= 80:
-            cefr = "B1"
-        elif 80 > level >= 70:
-            cefr = "B2"
-        elif 70 > level >= 60:
-            cefr = "C1"
-        else:
-            cefr = "C2"
-    elif index == "Wiener Sachtextformel":
-        if 0 <= level < 1:
-            cefr = "<A1"
-        elif 1 <= level < 3:
-            cefr = "A1"
-        elif 3 <= level < 6:
-            cefr = "A2"
-        elif 6 <= level < 9:
-            cefr = "B1"
-        elif 9 <= level < 12:
-            cefr = "B2"
-        elif 13 <= level < 15:
-            cefr = "C1"
-        else:
-            cefr = "C2"
     
-    return cefr
-    
+# Language mappings dictionary to be used in the CEFR conversion 
+language_mappings = {
+    "Arabic": {
+        "index": "Osman",
+        "readability_func": textstat.osman,
+    },
+    "English": {
+        "index": "Flesch-Kincaid",
+        "readability_func": textstat.flesch_reading_ease,
+    },
+    "German": {
+        "index": "Wiener Sachtextformel",
+        "readability_func": textstat.wiener_sachtextformel,
+    },
+    "Italian": {
+        "index": "Gulpease",
+        "readability_func": textstat.gulpease_index,
+    },
+    "Spanish": {
+        "index": "Fernandez-Huerta",
+        "readability_func": textstat.fernandez_huerta,
+    },
+}

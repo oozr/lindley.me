@@ -35,16 +35,18 @@ class GSEAnalyser(BaseAnalyser):
 
         for word in sentence:
             lemma = word.lemma_
-            db.execute("SELECT link_table_id FROM vocabulary_table WHERE word=?", [lemma])
-            result = db.fetchone()
-            if result:
-                id_value = str(result[0])
-                word_score = db.execute("SELECT gse FROM link_table WHERE id=?", [id_value])
-                word_score_value = str(word_score.fetchone()[0])
-                found_words[word_score_value] = lemma
-                gse_scores.append(int(word_score_value))
-            else:
-                words_not_found.append(word)
+            
+            if lemma.lower() != 'to':
+                db.execute("SELECT link_table_id FROM vocabulary_table WHERE word=?", [lemma])
+                result = db.fetchone()
+                if result:
+                    id_value = str(result[0])
+                    word_score = db.execute("SELECT gse FROM link_table WHERE id=?", [id_value])
+                    word_score_value = str(word_score.fetchone()[0])
+                    found_words[word_score_value] = lemma
+                    gse_scores.append(int(word_score_value))
+                else:
+                    words_not_found.append(word)
 
         conn.close()
 

@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}{{ blog_post.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <!-- Blog Post Content Column -->
+        <div class="col-md-8">
+            <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px; margin-bottom: 10px;">
+                <h1 class="card-title">{{ blog_post.title }}</h1>
+                <p class="text-muted">Posted on {{ blog_post.date }} by {{ blog_post.author }}</p>
+                <div class="blog-post-img-container">{{ blog_post.content|safe }}</div>
+
+                <!-- Display images if available -->
+                {% for image_url in blog_post.image_urls %}
+                <div class="d-flex justify-content-center">
+                    <img src="{{ image_url }}" alt="Image" class="img-fluid rounded" style="max-width: 100%;">
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <!-- About Column -->
+        <div class="col-md-4">
+            <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px; margin-bottom: 10px;">
+                <h3>About</h3>
+                <p>Welcome to the blog! Here are our ravings about language frameworks and how artificial intelligence
+                    can help apply the research into our everyday language learning lives.</p> 
+                    <br>
+                    <p>Any comments you can reach me at george.j.lindley@gmail.com</p>
+                <!-- Add other content for the sidebar if desired -->
+            </div>
+
+            <!-- Back to Blog Button Container -->
+            <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px; margin-bottom: 10px;">
+                <a href="{{ url_for('views.blog_home') }}" class="btn btn-pastel-red">Back to Blog</a>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+<br>
+{% endblock %}

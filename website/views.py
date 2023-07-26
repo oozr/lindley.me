@@ -68,17 +68,17 @@ class GSEAnalyser(BaseAnalyser):
         # Calculate the average GSE score
         average_gse = sum(gse_scores) / number_of_words
 
-        # Clean up words_not_found and find the top words to learn
-        word_processor = WordProcessor()
-        none_words = word_processor.clean_words_not_found(words_not_found)
-        learn_words = word_processor.words_to_learn(found_words)
-
         # Estimate the overall GSE level and convert it to CEFR
         gse_level_estimator = GSELevelEstimator()
         overall_gse = round(gse_level_estimator.estimate_gse_level(flesch_reading_level, average_gse))
         index = "GSE_CEFR"
         cefr_converter = CEFRConverter()
         overall_cefr = cefr_converter.convert_to_cefr(overall_gse, index)
+
+        # Clean up words_not_found and find the top words to learn
+        word_processor = WordProcessor()
+        none_words = word_processor.clean_words_not_found(words_not_found)
+        learn_words = word_processor.words_to_learn(found_words, overall_gse)
 
         return overall_gse, overall_cefr, none_words, learn_words
 

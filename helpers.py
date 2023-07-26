@@ -39,14 +39,20 @@ class WordProcessor:
         # Return intermediate results as a tuple
         return cleaned_output
 
-    def words_to_learn(self, found_words):
-        #order the dictionary found_words by GSE score, left to right into a new list, max 10 words
+    def words_to_learn(self, found_words, overall_gse):
+        # Order the dictionary found_words by GSE score, left to right into a new list, max 10 words
         ordered_words = dict(sorted(found_words.items(), key=lambda x: int(x[0])))
+        # Create a new list to store the words that meet the criteria
         new_list = []
-        for i in range(len(ordered_words)):
-            new_list.append(ordered_words.popitem())
-            if i == 9:
+        # Loop through the ordered_words and add words that have a GSE score higher than overall_gse
+        for gse_score, word in ordered_words.items():
+            if int(gse_score) > overall_gse:
+                new_list.append((gse_score, word))
+            # Limit the number of words to 10
+            if len(new_list) == 10:
                 break
+        # Reverse the list to get it in descending order of GSE score
+        new_list.reverse()
         return new_list
 
 

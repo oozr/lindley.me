@@ -120,9 +120,13 @@ class Blog:
             return file.read()
 
     def generate_blog_post_objects(self):
+        markdown_files = sorted(
+            [filename for filename in os.listdir(BLOG_DIR) if filename.endswith(".md")]
+        )
+
         blog_posts = []
 
-        for filename in os.listdir(BLOG_DIR):
+        for filename in markdown_files:
             if filename.endswith(".md"):
                 file_path = os.path.join(BLOG_DIR, filename)
                 content = self.read_markdown_file(file_path)

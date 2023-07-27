@@ -5,10 +5,8 @@
 
 <head>
     <title>Results</title>
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
 </head>
-
-<body>  
+<body> 
     <div class="container-fluid mt-5">
         <div class="row justify-content-center">
             <div class="col-md-4">
@@ -16,8 +14,9 @@
                     <div class="card-body">
                         <h5 class="card-title">GSE Score</h5>
                         <hr>
+                        {% set overall_gse_value = overall_gse %}
                         <p class="card-text">The overall GSE 10-90 level of this text is:</p>
-                        <h2 class="card-text text-center" id="gse-score">{{overall_gse}}</h2>
+                        <h2 class="card-text text-center" id="gse-score">{{ overall_gse }}</h2>
                     </div>
                 </div>
             </div>
@@ -27,7 +26,7 @@
                         <h5 class="card-title">CEFR Score</h5>
                         <hr>
                         <p class="card-text">This correlates to a CEFR score of:</p>
-                        <h3 class="card-text text-center" id="cefr-score">{{overall_cefr}}</h3>
+                        <h3 class="card-text text-center" id="cefr-score">{{ overall_cefr }}</h3>
                     </div>
                 </div>
             </div>
@@ -66,5 +65,17 @@
             </div>
         </div>
     </div>
-<br>
+    <br>
+    <div class="container-fluid p-0 m-0">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px;">
+                    <a href="gse_analyser" class="btn btn-pastel-green">Start again with a new text</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</body>
 {% endblock %}

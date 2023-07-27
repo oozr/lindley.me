@@ -1,0 +1,159 @@
+/* CSS styles for the moving words background */
+.moving-words-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+  }
+  
+  .moving-word {
+    position: absolute;
+    color: #f1f1f1; /* Very light grey color */
+    font-size: 14px;
+    font-weight: bold;
+    animation: floatAround 10s linear infinite;
+  }
+  
+  /* CSS styles for the navbar */
+  .navbar {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    background-color: #a6dcef; /* Pastel blue */
+  }
+  
+  .navbar .navbar-nav .nav-item .nav-link {
+    font-weight: bold;
+  }
+  
+  .navbar .navbar-nav .nav-item .nav-link#home {
+    color: #fff; /* White color for the "Home" link */
+  }
+  
+  .navbar .navbar-nav .nav-item .nav-link#logout {
+    color: #fff4a3; /* Pastel yellow color for the "Blog" link */
+  }
+  
+  .navbar .navbar-nav .nav-item .nav-link#gse_analyser {
+    color: #b7e4c7; /* Pastel green color for the "GSE Analyser" link */
+  }
+  
+  .navbar .navbar-nav .nav-item .nav-link#cefr_analyser {
+    color: #f8b6c5; /* Pastel pink color for the "CEFR Analyser" link */
+  }
+  
+  /* ... (existing code for moving words background remains unchanged) ... */
+  
+  @keyframes floatAround {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-100px, 100px); /* Change this to adjust the floating distance */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  /* Animation styles for moving words in different directions */
+  @keyframes floatUp {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(0, -100px); /* Change this to adjust the floating distance */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  @keyframes floatDown {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(0, 100px); /* Change this to adjust the floating distance */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  @keyframes floatLeft {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(-100px, 0); /* Change this to adjust the floating distance */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  @keyframes floatRight {
+    0% {
+      transform: translate(0, 0);
+    }
+    50% {
+      transform: translate(100px, 0); /* Change this to adjust the floating distance */
+    }
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+  
+  /* Custom CSS for buttons, blog post images, etc. */
+  .btn-pastel-blue {
+    background-color: #a6dcef;
+    color: #fff;
+  }
+  
+  .btn-pastel-green {
+    background-color: #b7e4c7;
+    color: #fff;
+  }
+  
+  .btn-pastel-pink {
+    background-color: #f8b6c5;
+    color: #fff;
+  }
+  
+  .btn-pastel-yellow {
+    background-color: #fff4a3;
+    color: #fff;
+  }
+  
+  .btn-pastel-orange {
+    background-color: #ffdac9;
+    color: #fff;
+  }
+  
+  .btn-pastel-purple {
+    background-color: #cbb4d4;
+    color: #fff;
+  }
+  
+  .btn-pastel-red {
+    background-color: #ffb6b9;
+    color: #fff;
+  }
+  
+  .btn-pastel-gray {
+    background-color: #eaeaea;
+    color: #fff;
+  }
+  
+  /* Custom CSS for blog post images */
+  .blog-post-img-container {
+    max-width: 100%;
+    overflow: hidden;
+  }
+  
+  .blog-post-img-container img {
+    width: 100%;
+    height: auto;
+  }

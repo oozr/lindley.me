@@ -16,35 +16,6 @@
     animation: floatAround 10s linear infinite;
   }
   
-  /* CSS styles for the navbar */
-  .navbar {
-    padding-left: 1rem;
-    padding-right: 1rem;
-    background-color: #a6dcef; /* Pastel blue */
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link {
-    font-weight: bold;
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link#home {
-    color: #fff; /* White color for the "Home" link */
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link#logout {
-    color: #fff4a3; /* Pastel yellow color for the "Blog" link */
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link#gse_analyser {
-    color: #b7e4c7; /* Pastel green color for the "GSE Analyser" link */
-  }
-  
-  .navbar .navbar-nav .nav-item .nav-link#cefr_analyser {
-    color: #f8b6c5; /* Pastel pink color for the "CEFR Analyser" link */
-  }
-  
-  /* ... (existing code for moving words background remains unchanged) ... */
-  
   @keyframes floatAround {
     0% {
       transform: translate(0, 0);

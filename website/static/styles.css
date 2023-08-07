@@ -1,130 +1,94 @@
-/* CSS styles for the moving words background */
-.moving-words-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-  }
-  
-  .moving-word {
-    position: absolute;
-    color: #f1f1f1; /* Very light grey color */
-    font-size: 14px;
-    font-weight: bold;
-    animation: floatAround 10s linear infinite;
-  }
-  
-  @keyframes floatAround {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(-100px, 100px); /* Change this to adjust the floating distance */
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-  
-  /* Animation styles for moving words in different directions */
-  @keyframes floatUp {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(0, -100px); /* Change this to adjust the floating distance */
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-  
-  @keyframes floatDown {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(0, 100px); /* Change this to adjust the floating distance */
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-  
-  @keyframes floatLeft {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(-100px, 0); /* Change this to adjust the floating distance */
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-  
-  @keyframes floatRight {
-    0% {
-      transform: translate(0, 0);
-    }
-    50% {
-      transform: translate(100px, 0); /* Change this to adjust the floating distance */
-    }
-    100% {
-      transform: translate(0, 0);
-    }
-  }
-  
-  /* Custom CSS for buttons, blog post images, etc. */
-  .btn-pastel-blue {
-    background-color: #a6dcef;
-    color: #fff;
-  }
-  
-  .btn-pastel-green {
-    background-color: #b7e4c7;
-    color: #fff;
-  }
-  
-  .btn-pastel-pink {
-    background-color: #f8b6c5;
-    color: #fff;
-  }
-  
-  .btn-pastel-yellow {
-    background-color: #fff4a3;
-    color: #fff;
-  }
-  
-  .btn-pastel-orange {
-    background-color: #ffdac9;
-    color: #fff;
-  }
-  
-  .btn-pastel-purple {
-    background-color: #cbb4d4;
-    color: #fff;
-  }
-  
-  .btn-pastel-red {
-    background-color: #ffb6b9;
-    color: #fff;
-  }
-  
-  .btn-pastel-gray {
-    background-color: #eaeaea;
-    color: #fff;
-  }
-  
-  /* Custom CSS for blog post images */
-  .blog-post-img-container {
-    max-width: 100%;
-    overflow: hidden;
-  }
-  
-  .blog-post-img-container img {
-    width: 100%;
-    height: auto;
-  }
+/* Critical CSS (inline styles for the navbar) */
+.navbar {
+  padding-left: 1rem;
+  padding-right: 1rem;
+  background-color: #a6dcef; /* Pastel blue */
+}
+
+/* Add other critical styles here */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f8f8f8; /* Light gray */
+  color: #333; /* Default text color */
+  transition: background-color 0.3s, color 0.3s; /* Add transitions for smooth dark mode switch */
+}
+
+/* Add custom styles for dark mode */
+body.dark-mode {
+  background-color: #333;
+  color: #f1f1f1; /* Light text color for dark mode */
+}
+
+/* Toggle button styles */
+.form-check-label::before,
+.form-check-label::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 36px;
+  height: 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.form-check-label::before {
+  background-color: #d8dee9; /* Light gray */
+}
+
+.form-check-label::after {
+  background-color: #fff; /* White */
+}
+
+.form-check-input:checked + .form-check-label::before {
+  background-color: #1a202c; /* Dark gray */
+}
+
+.form-check-input:checked + .form-check-label::after {
+  left: 16px;
+}
+
+.form-check-label {
+  cursor: pointer;
+  color: #000; /* Default text color for the toggle label */
+}
+
+/* Style for the dark mode text when in dark mode */
+.dark-mode .form-check-label {
+  color: #f1f1f1; /* Light text color for dark mode toggle label */
+}
+
+/* Custom CSS for buttons, blog post images, etc. */
+.btn-pastel-blue {
+  background-color: #a6dcef;
+  color: #fff;
+}
+
+/* Custom CSS for blog post images */
+.blog-post-img-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.blog-post-img-container img {
+  width: 100%;
+  height: auto;
+}
+
+.card {
+  border-radius: 15px;
+  padding: 20px;
+  margin-bottom: 10px;
+}
+
+/* Additional styles for a minimalist look (Optional) */
+.container {
+  padding: 20px;
+}
+
+/* Optional: Remove container styles for a more minimalist look */
+.container {
+  padding: 0;
+}

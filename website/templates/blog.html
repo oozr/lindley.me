@@ -2,34 +2,17 @@
 {% block title %}Blog{% endblock %} 
 
 {% block content %}
-
 <div class="container mt-5">
-    <div class="row">
-        <!-- Blog Posts Column -->
-        <div class="col-md-8">
-            {% for post in blog_posts %}
-            <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px; margin-bottom: 10px;">
-                <h2>{{ post.title }}</h2>
-                <p class="text-muted">Posted on {{ post.date }} by {{ post.author }}</p>
-                {{ post.excerpt }}
-                <a href="{{ url_for('views.blog_post', post_id=post.id) }}" class="btn btn-pastel-blue">Read More</a>
-                <hr>
-            </div>
-            {% endfor %}
+  <div class="row">
+    <!-- Blog Posts Column -->
+    <div class="col-md-8">
+      {% for post in blog_posts %}
+        <div class="mb-4">
+          <h2>{{ post.title }}</h2>
+          <p class="text-muted">Posted on {{ post.date }} by {{ post.author }}</p>
+          {{ post.excerpt }}
+          <a href="{{ url_for('views.blog_post', post_id=post.id) }}" class="btn btn-pastel-blue">Read More</a>
         </div>
-
-        <!-- About Column -->
-        <div class="col-md-4">
-            <div class="card shadow bg-white" style="border-radius: 15px; padding: 20px; margin-bottom: 10px;">
-                <h3>About</h3>
-                <p>Welcome to the blog! Here are our ravings about language frameworks and how artificial intelligence can help apply the research into our everyday language learning lives.</p> 
-                <br>
-                <p>Any comments you can reach me at george.j.lindley@gmail.com</p>
-                <!-- Add other content for the sidebar if desired -->
-            </div>
-        </div>
-    </div>
+      {% endfor %}
 </div>
-<br>
-<br>
 {% endblock %}

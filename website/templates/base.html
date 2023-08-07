@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Your Website</title>
+  <title>lindley.me</title>
 
   <!-- Critical CSS (inline styles for the navbar) -->
   <style>
@@ -12,102 +12,36 @@
       padding-right: 1rem;
       background-color: #a6dcef; /* Pastel blue */
     }
-
     /* Add other critical styles here */
   </style>
 
-  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
   <!-- Your main CSS file -->
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
   <!-- Favicon -->
-  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link rel="icon" href="{{ url_for('static', filename='lindleyme_favicon.ico') }}" type="image/x-icon">
 
-  <!-- Add any other necessary meta tags, stylesheets, and scripts here -->
-
+  <!-- JavaScript for dark mode -->
+  <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
 </head>
 <body>
-  <!-- Your existing navbar and other content goes here -->
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-white">
-    <button
-      class="navbar-toggler"
-      type="button"
-      data-bs-toggle="collapse"
-      data-bs-target="#navbar"
-    >
-      <span class="navbar-toggler-icon"></span>
-    </button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
     <!-- define the items in the collapsable navbar-->
     <div>
       <a class="navbar-brand" href="/">
-        <img src="{{ url_for('static', filename='cefr_logo.png') }}">
+        <img src="static/lindley_logo.png">
       </a>
     </div>
-          
-    <div class="collapse navbar-collapse" id="navbar">
-      <div class="navbar-nav" text-align="center">
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="logout" href="/blog">Blog</a>
-          <a class="nav-item nav-link" id="gse_analyser" href="/gse_analyser">GSE Analyser</a>
-          <a class="nav-item nav-link" id="cefr_analyser" href="/cefr_analyser">CEFR Analyser</a>
-      </div>
+    <!-- Toggle switch for dark mode -->
+    <div class="form-check form-switch mx-3">
+      <input class="form-check-input" type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+      <label class="form-check-label text-white" for="darkModeToggle">Dark Mode</label>
     </div>
   </nav>
   
-  <!-- Your existing styles for buttons, blog post images, etc. go here -->
-  <div class="container">{% block content %} {% endblock %}</div>
+  {% block content %}
+  {% endblock %}
 
-  <!-- Add the container for the moving words background -->
-  <div class="moving-words-background"></div>
-
-  <script>
-    // JavaScript code for generating and animating the moving words background
-    const movingWordsContainer = document.querySelector('.moving-words-background');
-    const wordList = ['we', 'from', 'all', 'life', 'sicklied', 'when', 'takes', 'his', 'know', 'sea', 'whips', 'with', 'disprizd', 'fortune', 'great', 'their', 'say', 'perchance', 'makes', 'delay', 'shuffled', 'under', 'puzzles', 'thus', 'pale', 'awry', 'wrong', 'die—to', 'them', 'or', 'whether', 'thoppressors', 'end', 'might', 'natural', 'but', 'patient', 'bodkin?', 'hue', 'doth', 'nobler', 'enterprises', 'calamity', 'theres', 'rather', 'weary', 'to', 'of?', 'shocks', 'something', 'for', 'quietus', 'proud', 'oer', 'more', 'cowards', 'bourn', 'have', 'turn', 'mortal', 'dread', 'sweat', 'resolution', 'flesh', 'be', 'spurns', 'so', 'respect', 'currents', 'than', 'native', 'cast', 'merit', 'conscience', 'tis', 'arrows', 'no', 'make', 'contumely', 'scorns', 'heir', 'traveller', 'opposing', 'thought', 'off', 'die', 'rub', 'a', 'take', 'outrageous', 'would', 'that', 'who', 'pangs', 'love', 'and', 'arms', 'by', 'he', 'those', 'consummation', 'must', 'ills', 'moment', 'whose', 'of', 'bare', 'dream—ay', 'lose', 'us', 'heart-ache', 'insolence', 'will', 'returns', 'troubles', 'death', 'in', 'come', 'time', 'give', 'bear', 'others', 'mind', 'against', 'sleep', 'after', 'is', 'dreams', 'not', 'undiscovered', 'action', 'slings', 'the', 'what', 'fly', 'himself', 'laws', 'country', 'coil', 'regard', 'suffer', 'thunworthy', 'may', 'thousand', 'this', 'fardels', 'devoutly', 'question', 'wishd', 'name', 'mans', 'grunt', 'office', 'pith', 'pause—theres', 'long'];
-
-    // Function to generate a random number within a range
-    function getRandomNumber(min, max) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-
-    // Function to create and animate a moving word
-    function getRandomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-  // Function to create and animate a moving word
-    function createMovingWord() {
-    const word = document.createElement('span');
-    word.classList.add('moving-word');
-    word.textContent = wordList[getRandomNumber(0, wordList.length - 1)];
-    word.style.left = `${getRandomNumber(0, 100)}%`;
-    word.style.top = `${getRandomNumber(0, 100)}%`;
-
-    const direction = getRandomNumber(1, 4); // 1: up, 2: down, 3: left, 4: right
-    const delay = getRandomNumber(0, 10); // Random delay between 0 and 10 seconds
-    const animationDuration = getRandomNumber(5, 15); // Random animation duration between 5 and 15 seconds
-
-    if (direction === 1) {
-      word.style.animation = `floatUp ${animationDuration}s ${delay}s linear infinite`;
-    } else if (direction === 2) {
-      word.style.animation = `floatDown ${animationDuration}s ${delay}s linear infinite`;
-    } else if (direction === 3) {
-      word.style.animation = `floatLeft ${animationDuration}s ${delay}s linear infinite`;
-    } else {
-      word.style.animation = `floatRight ${animationDuration}s ${delay}s linear infinite`;
-    }
-
-    movingWordsContainer.appendChild(word);
-  }
-
-    // Generate moving words
-    for (let i = 0; i < 100; i++) {
-      createMovingWord();
-    }
-  </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous" defer></script>
 </body>
 </html>

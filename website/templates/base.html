@@ -4,40 +4,37 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>lindley.me</title>
-
-  <!-- Critical CSS (inline styles for the navbar) -->
-  <style>
-    .navbar {
-      padding-left: 1rem;
-      padding-right: 1rem;
-      background-color: #a6dcef; /* Pastel blue */
-    }
-    /* Add other critical styles here */
-  </style>
-
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <!-- Your main CSS file -->
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-  <!-- Favicon -->
   <link rel="icon" href="{{ url_for('static', filename='lindleyme_favicon.ico') }}" type="image/x-icon">
-
-  <!-- JavaScript for dark mode -->
   <script src="{{ url_for('static', filename='scripts.js') }}" defer></script>
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-    <!-- define the items in the collapsable navbar-->
-    <div>
-      <a class="navbar-brand" href="/">
-        <img src="static/lindley_logo.png">
-      </a>
+  <div class="container text-center mt-5">
+    <div class="row">
+      <div class="col">
+        <a href="/">
+          <img src="static/lindley_logo_blue.png" alt="Logo">
+        </a>
+      </div>
     </div>
-    <!-- Toggle switch for dark mode -->
-    <div class="form-check form-switch mx-3">
-      <input class="form-check-input" type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
-      <label class="form-check-label text-white" for="darkModeToggle">Dark Mode</label>
+    <div class="row mt-2 justify-content-center">
+      <div class="col col-lg-2">
+        <div class="switch-container">
+          <svg xmlns="http://www.w3.org/2000/svg" class="sun-icon" fill="none" viewBox="0 0 20 20" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+          </svg>
+          <label class="switch">
+            <input type="checkbox" id="darkModeToggle" onchange="toggleDarkMode()">
+            <span class="slider"></span>
+          </label>
+          <svg xmlns="http://www.w3.org/2000/svg" class="moon-icon" fill="none" viewBox="0 0 25 25" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+          </svg>
+        </div>
+      </div>
     </div>
-  </nav>
+  </div>
   
   {% block content %}
   {% endblock %}

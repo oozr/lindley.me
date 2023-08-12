@@ -1,68 +1,91 @@
-/* Critical CSS (inline styles for the navbar) */
-.navbar {
-  padding-left: 1rem;
-  padding-right: 1rem;
-  background-color: #a6dcef; /* Pastel blue */
-}
-
-/* Add other critical styles here */
-body {
+/* Reset some default browser styles */
+body, h1, h2, h3, p {
   margin: 0;
   padding: 0;
-  font-family: Arial, sans-serif;
-  background-color: #f8f8f8; /* Light gray */
-  color: #333; /* Default text color */
-  transition: background-color 0.3s, color 0.3s; /* Add transitions for smooth dark mode switch */
 }
 
-/* Add custom styles for dark mode */
+/* General styling */
+body {
+  font-family: Arial, sans-serif;
+  transition: background-color 0.3s, color 0.3s; /* Transitions for smooth dark mode switch */
+}
+
+/* Dark mode styles */
 body.dark-mode {
   background-color: #333;
   color: #f1f1f1; /* Light text color for dark mode */
 }
 
-/* Toggle button styles */
-.form-check-label::before,
-.form-check-label::after {
-  content: '';
+/* Toggle slider styles */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
   position: absolute;
+  cursor: pointer;
   top: 0;
   left: 0;
-  width: 36px;
-  height: 20px;
-  border-radius: 10px;
-  transition: background-color 0.3s;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
 }
 
-.form-check-label::before {
-  background-color: #d8dee9; /* Light gray */
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
 }
 
-.form-check-label::after {
-  background-color: #fff; /* White */
+input:checked + .slider {
+  background-color: teal; /* Changed color to teal */
 }
 
-.form-check-input:checked + .form-check-label::before {
-  background-color: #1a202c; /* Dark gray */
+input:focus + .slider {
+  box-shadow: 0 0 1px teal; /* Changed color to teal */
 }
 
-.form-check-input:checked + .form-check-label::after {
-  left: 16px;
+input:checked + .slider:before {
+  transform: translateX(26px);
 }
 
-.form-check-label {
-  cursor: pointer;
-  color: #000; /* Default text color for the toggle label */
+.sun-icon,
+.moon-icon {
+  vertical-align: middle;
+  width: 24px; /* Increased size */
+  height: 24px; /* Increased size */
+  fill: teal; /* Changed color to teal */
+  margin: 0 4px;
 }
 
-/* Style for the dark mode text when in dark mode */
-.dark-mode .form-check-label {
-  color: #f1f1f1; /* Light text color for dark mode toggle label */
+/* Custom CSS for buttons */
+.btn-pastel-blue,
+.btn {
+  background-color: teal; /* Changed color to teal */
+  color: #fff;
+  border: none; /* Added to remove button border */
 }
 
-/* Custom CSS for buttons, blog post images, etc. */
-.btn-pastel-blue {
-  background-color: #a6dcef;
+.btn-pastel-blue:hover,
+.btn:hover {
+  background-color: #c3a6e8; /* Lavender purple color */
   color: #fff;
 }
 
@@ -77,18 +100,25 @@ body.dark-mode {
   height: auto;
 }
 
+/* Card styles */
 .card {
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 10px;
 }
 
-/* Additional styles for a minimalist look (Optional) */
-.container {
+.blog-post-container {
+  border: 1px dotted #ccc;
   padding: 20px;
+  margin-bottom: 20px;
 }
 
-/* Optional: Remove container styles for a more minimalist look */
-.container {
-  padding: 0;
+/* Teal color for blog post titles */
+.blog-post-title {
+  color: teal; /* Changed color to teal */
+}
+
+/* Add this at the end of your styles.css */
+.hide-content {
+  display: none;
 }

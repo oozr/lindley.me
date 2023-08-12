@@ -17,11 +17,20 @@ body.dark-mode {
 }
 
 /* Toggle slider styles */
+.switch-container {
+  display: flex;
+  align-items: center; /* Align the switch vertically */
+  /* add space to the left of the switch container */
+  margin-left: auto;
+  margin-right: 40px;
+}
+
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 47px; /* Decreased width */
+  height: 24px; /* Decreased height */
+
 }
 
 .switch input {
@@ -39,14 +48,14 @@ body.dark-mode {
   bottom: 0;
   background-color: #ccc;
   transition: 0.4s;
-  border-radius: 34px;
+  border-radius: 20px; /* Adjusted border-radius */
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 16px; /* Decreased height */
+  width: 16px; /* Decreased width */
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -55,23 +64,23 @@ body.dark-mode {
 }
 
 input:checked + .slider {
-  background-color: teal; /* Changed color to teal */
+  background-color: teal;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px teal; /* Changed color to teal */
+  box-shadow: 0 0 1px teal;
 }
 
 input:checked + .slider:before {
-  transform: translateX(26px);
+  transform: translateX(22px); /* Adjusted translation value */
 }
 
 .sun-icon,
 .moon-icon {
   vertical-align: middle;
-  width: 24px; /* Increased size */
-  height: 24px; /* Increased size */
-  fill: teal; /* Changed color to teal */
+  width: 24px;
+  height: 24px;
+  fill: teal;
   margin: 0 4px;
 }
 

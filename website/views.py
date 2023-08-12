@@ -42,7 +42,7 @@ class Blog:
 
                 # Truncate the cleaned_post_content to the first 50 words to use as the excerpt
                 excerpt_words = cleaned_post_content.split()[:50]
-                excerpt = " ".join(excerpt_words) + "..." if len(excerpt_words) >= 50 else cleaned_post_content
+                excerpt = " ".join(excerpt_words) + "..." if len(excerpt_words) >= 40 else cleaned_post_content
 
                 # Convert the Markdown content to HTML
                 html_content = markdown.markdown(post_content)

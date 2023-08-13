@@ -10,12 +10,22 @@ body {
   transition: background-color 0.3s, color 0.3s; /* Transitions for smooth dark mode switch */
 }
 
+/* Add padding under paragraphs */
+p {
+  padding-bottom: 10px;
+}
+
 h2 {
   color: teal; /* Lavender color for h2 headings */
+  padding-bottom: 10px;
+  font-size: 32px;
 }
 
 h3 {
   color: steelblue; /* Steelblue color for h3 headings */
+  padding-top: 20px;
+  padding-bottom: 10px;
+  font-size: 24px;
 }
 
 /* Dark mode styles */

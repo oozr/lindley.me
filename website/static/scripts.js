@@ -1,4 +1,4 @@
-// dark-mode.js
+// scripts.js
 
 // Function to set dark mode and update toggle state
 function setDarkModePreference(enabled) {
@@ -24,24 +24,21 @@ function toggleDarkMode() {
 function setInitialDarkMode() {
   const darkModeToggle = document.getElementById("darkModeToggle");
   const storedPreference = localStorage.getItem("darkMode");
-  
+
+  // Check the time of day (morning or night) to decide whether to use dark mode
+  const hour = new Date().getHours();
+  const isNightTime = hour >= 18 || hour <= 6;
+
   if (storedPreference === "enabled") {
     setDarkModePreference(true);
   } else if (storedPreference === "disabled") {
     setDarkModePreference(false);
+  } else if (isNightTime) {
+    setDarkModePreference(true);
   } else {
-    // Check if the user's preference is set to dark mode
-    const prefersDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    // Check the time of day (morning or night) to decide whether to use dark mode
-    const hour = new Date().getHours();
-    const isNightTime = hour >= 18 || hour <= 6;
-    
-    if (prefersDarkMode || isNightTime) {
-      setDarkModePreference(true);
-    } else {
-      setDarkModePreference(false);
-    }
+    setDarkModePreference(false);
   }
+
 }
 
 // Call the function to set the initial dark mode state

@@ -10,6 +10,14 @@ body {
   transition: background-color 0.3s, color 0.3s; /* Transitions for smooth dark mode switch */
 }
 
+h2 {
+  color: teal; /* Lavender color for h2 headings */
+}
+
+h3 {
+  color: steelblue; /* Steelblue color for h3 headings */
+}
+
 /* Dark mode styles */
 body.dark-mode {
   background-color: #333;
@@ -94,7 +102,7 @@ input:checked + .slider:before {
 
 .btn-pastel-blue:hover,
 .btn:hover {
-  background-color: #c3a6e8; /* Lavender purple color */
+  background-color: steelblue;
   color: #fff;
 }
 
@@ -130,4 +138,34 @@ input:checked + .slider:before {
 /* Add this at the end of your styles.css */
 .hide-content {
   display: none;
+}
+
+/* Additional styling for the blog post content */
+.blog-post-content {
+  font-family: Arial, sans-serif; /* Apply 'Open Sans' font to content */
+  font-size: 16px; /* Adjust font size as needed */
+  line-height: 1.6; /* Adjust line height for readability */
+  margin-top: 10px; /* Add spacing above content */
+}
+
+/* Responsive video container */
+.video-container {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.25%; /* 16:9 aspect ratio (h/w * 100%) */
+  background-color: var(--video-background-color); /* Use the custom property for background color */
+  margin: 0 auto; /* Center the video container horizontally */
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Dark mode styles for video containers */
+body.dark-mode .video-container {
+  background-color: darkgrey; /* Dark grey background in dark mode */
 }

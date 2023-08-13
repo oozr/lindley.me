@@ -32,8 +32,7 @@ class Blog:
                 metadata_lines, post_content = content.split("\n\n", 1)
 
                 # Remove lines that start with '#' or '##' from the post_content
-                cleaned_post_content = "\n".join(line for line in post_content.splitlines() if not line.strip().startswith('#'))
-
+                cleaned_post_content = "\n".join(line for line in post_content.splitlines() if not line.strip().startswith('#') and not line.strip().startswith('&nbsp;'))
                 # Parse metadata from metadata_lines
                 metadata = {}
                 for line in metadata_lines.splitlines():
@@ -76,15 +75,9 @@ class Blog:
                 # Add the image URLs to the blog post object
                 blog_post["image_urls"] = image_urls
 
-                # Add the video filenames to the blog post object
-                blog_post["video_files"] = video_filenames
-
                 return blog_post
 
         return None
-
-
-
 
 
 blog_instance = Blog()

@@ -62,5 +62,3 @@ CEFR.AI text analyser already offers a lot of unique benefit to teachers conduct
 3. 5-10 multiple choice questions (with the answers hidden on the next page)
 
 Currently I am experimenting with different APIs such as OpenAI, and APIs available on HuggingFace to power this capability. The first API call is needed to generate the question and answer, the second API call is needed to generate the additional three disctractors (wrong answers, but not so wrong that the learner would never choose them). 
-
-**For any feedback or suggestions for this project please contact @georgelindley_ on X (Twitter).**

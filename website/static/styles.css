@@ -15,17 +15,26 @@ p {
   padding-bottom: 10px;
 }
 
-h2 {
-  color: teal; /* Lavender color for h2 headings */
+h1 {
+  color: teal;
   padding-bottom: 10px;
   font-size: 28px;
+  font-weight: bold;
+}
+
+h2 {
+  color: steelblue;
+  padding-bottom: 10px;
+  font-size: 22px;
+  font-weight: bold;
 }
 
 h3 {
-  color: steelblue; /* Steelblue color for h3 headings */
+  color: brown;
   padding-top: 20px;
   padding-bottom: 10px;
-  font-size: 20px;
+  font-size: 18px;
+  font-weight: bold;
 }
 
 /* Dark mode styles */

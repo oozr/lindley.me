@@ -2,8 +2,6 @@ Title: The Paradoxical Nature of Innovation: A Philosophical Exploration into Te
 Date: 2023-08-05
 Author: George Lindley
 
-## Introduction
-
 In "The Beginning of Infinity" by David Deutsch, two philosophies that influence the nature of scientific progress are prominently discussed: instrumentalism and realism. Instrumentalism is a philosophy that focuses on the practical applications of ideas and technologies, often without delving deeply into the underlying principles that govern them. Realism, on the other hand, emphasizes a deep understanding of the underlying principles of phenomena, often leading to groundbreaking discoveries and innovations. These philosophies, while seemingly abstract, have a profound impact on the innovation strategies and operational dynamics of tech giants like Nvidia, Apple, Google, Microsoft, and Meta.
 
 ## The Paradox of Innovation

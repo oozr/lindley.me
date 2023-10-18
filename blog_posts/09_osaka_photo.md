@@ -2,7 +2,7 @@ Title: Osaka Japan, Futurism and Street Photography
 Date: 2023-10-18
 Author: George Lindley
 
-![Osaka neon](/website/static/blog_images/osaka.jpg "Osaka at night")
+![Osaka neon](../static/blog_images/osaka.jpg "Osaka at night")
 
 This is a different type of street photography that I normally do. But it came naturally, as did my exploration of motion in my photos. There’s a few photos where motion come out very well, it’s not overdone, because it’s purely using a Ricoh GR (wide angle) hand held camera. Keeping the shutter speed low (1/8) i.e. 0.125 of a second the lens stays open to capture shot - and the car has moved in that amount of time, but my steady hand can stabelize the shot for full clarity in that amount of time. Most use a tripod, but you don’t have the time or the care for any bit of fiddly equipment, anything that takes you away from the moment.
 

@@ -94,3 +94,7 @@ def blog_post(post_id):
         return render_template("blog_post.html", blog_post=blog_post)
     else:
         return "Blog post not found.", 404
+    
+@views.route('/photo')
+def photo():
+    return render_template("photo.html")

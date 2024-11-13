@@ -1,14 +1,12 @@
-// scripts.js
-
 // Function to set dark mode and update toggle state
 function setDarkModePreference(enabled) {
   const darkModeToggle = document.getElementById("darkModeToggle");
   if (enabled) {
-    document.body.classList.add("dark-mode");
+    document.documentElement.classList.add("dark-mode");
     darkModeToggle.checked = true;
     localStorage.setItem("darkMode", "enabled");
   } else {
-    document.body.classList.remove("dark-mode");
+    document.documentElement.classList.remove("dark-mode");
     darkModeToggle.checked = false;
     localStorage.setItem("darkMode", "disabled");
   }
@@ -24,22 +22,18 @@ function toggleDarkMode() {
 function setInitialDarkMode() {
   const darkModeToggle = document.getElementById("darkModeToggle");
   const storedPreference = localStorage.getItem("darkMode");
-
-  // Check the time of day (morning or night) to decide whether to use dark mode
   const hour = new Date().getHours();
   const isNightTime = hour >= 18 || hour <= 6;
 
-  if (storedPreference === "enabled") {
-    setDarkModePreference(true);
+  // Sync the toggle with the current state
+  if (document.documentElement.classList.contains("dark-mode")) {
+    darkModeToggle.checked = true;
   } else if (storedPreference === "disabled") {
     setDarkModePreference(false);
-  } else if (isNightTime) {
+  } else if (isNightTime && storedPreference === null) {
     setDarkModePreference(true);
-  } else {
-    setDarkModePreference(false);
   }
-
 }
 
-// Call the function to set the initial dark mode state
-setInitialDarkMode();
+// Call the function to set the initial dark mode state when DOM is ready
+document.addEventListener("DOMContentLoaded", setInitialDarkMode);

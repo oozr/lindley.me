@@ -1,3 +1,24 @@
+/* CSS Variables for theming */
+:root {
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --heading1-color: teal;
+  --heading2-color: steelblue;
+  --heading3-color: brown;
+  --border-color: #ccc;
+  --video-background-color: #f0f0f0;
+}
+
+:root.dark-mode {
+  --background-color: #333;
+  --text-color: #f1f1f1;
+  --heading1-color: #4db6ac;
+  --heading2-color: #78a7c8;
+  --heading3-color: #bc8f8f;
+  --border-color: #555;
+  --video-background-color: darkgrey;
+}
+
 /* Reset some default browser styles */
 body, h1, h2, h3, p {
   margin: 0;
@@ -7,7 +28,9 @@ body, h1, h2, h3, p {
 /* General styling */
 body {
   font-family: Arial, sans-serif;
-  transition: background-color 0.3s, color 0.3s; /* Transitions for smooth dark mode switch */
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* Add padding under paragraphs */
@@ -16,38 +39,31 @@ p {
 }
 
 h1 {
-  color: teal;
+  color: var(--heading1-color);
   padding-bottom: 10px;
   font-size: 28px;
   font-weight: bold;
 }
 
 h2 {
-  color: steelblue;
+  color: var(--heading2-color);
   padding-bottom: 10px;
   font-size: 22px;
   font-weight: bold;
 }
 
 h3 {
-  color: brown;
+  color: var(--heading3-color);
   padding-top: 20px;
   padding-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
 }
 
-/* Dark mode styles */
-body.dark-mode {
-  background-color: #333;
-  color: #f1f1f1; /* Light text color for dark mode */
-}
-
 /* Toggle slider styles */
 .switch-container {
   display: flex;
-  align-items: center; /* Align the switch vertically */
-  /* add space to the left of the switch container */
+  align-items: center;
   margin-left: auto;
   margin-right: 40px;
 }
@@ -55,9 +71,8 @@ body.dark-mode {
 .switch {
   position: relative;
   display: inline-block;
-  width: 47px; /* Decreased width */
-  height: 24px; /* Decreased height */
-
+  width: 47px;
+  height: 24px;
 }
 
 .switch input {
@@ -75,14 +90,14 @@ body.dark-mode {
   bottom: 0;
   background-color: #ccc;
   transition: 0.4s;
-  border-radius: 20px; /* Adjusted border-radius */
+  border-radius: 20px;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 16px; /* Decreased height */
-  width: 16px; /* Decreased width */
+  height: 16px;
+  width: 16px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -91,15 +106,15 @@ body.dark-mode {
 }
 
 input:checked + .slider {
-  background-color: teal;
+  background-color: var(--heading1-color);
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px teal;
+  box-shadow: 0 0 1px var(--heading1-color);
 }
 
 input:checked + .slider:before {
-  transform: translateX(22px); /* Adjusted translation value */
+  transform: translateX(22px);
 }
 
 .sun-icon,
@@ -107,21 +122,21 @@ input:checked + .slider:before {
   vertical-align: middle;
   width: 24px;
   height: 24px;
-  fill: teal;
+  fill: var(--heading1-color);
   margin: 0 4px;
 }
 
 /* Custom CSS for buttons */
 .btn-pastel-blue,
 .btn {
-  background-color: teal; /* Changed color to teal */
+  background-color: var(--heading1-color);
   color: #fff;
-  border: none; /* Added to remove button border */
+  border: none;
 }
 
 .btn-pastel-blue:hover,
 .btn:hover {
-  background-color: steelblue;
+  background-color: var(--heading2-color);
   color: #fff;
 }
 
@@ -141,39 +156,40 @@ input:checked + .slider:before {
   border-radius: 15px;
   padding: 20px;
   margin-bottom: 10px;
+  background-color: var(--background-color);
+  border: 1px solid var(--border-color);
 }
 
 .blog-post-container {
-  border: 1px dotted #ccc;
+  border: 1px dotted var(--border-color);
   padding: 20px;
   margin-bottom: 20px;
 }
 
 /* Teal color for blog post titles */
 .blog-post-title {
-  color: teal; /* Changed color to teal */
+  color: var(--heading1-color);
 }
 
-/* Add this at the end of your styles.css */
 .hide-content {
   display: none;
 }
 
 /* Additional styling for the blog post content */
 .blog-post-content {
-  font-family: Arial, sans-serif; /* Apply 'Open Sans' font to content */
-  font-size: 16px; /* Adjust font size as needed */
-  line-height: 1.6; /* Adjust line height for readability */
-  margin-top: 10px; /* Add spacing above content */
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-top: 10px;
 }
 
 /* Responsive video container */
 .video-container {
   position: relative;
   overflow: hidden;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio (h/w * 100%) */
-  background-color: var(--video-background-color); /* Use the custom property for background color */
-  margin: 0 auto; /* Center the video container horizontally */
+  padding-bottom: 56.25%;
+  background-color: var(--video-background-color);
+  margin: 0 auto;
 }
 
 .video-container iframe {
@@ -182,9 +198,4 @@ input:checked + .slider:before {
   left: 0;
   width: 100%;
   height: 100%;
-}
-
-/* Dark mode styles for video containers */
-body.dark-mode .video-container {
-  background-color: darkgrey; /* Dark grey background in dark mode */
 }

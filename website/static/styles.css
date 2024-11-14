@@ -66,43 +66,50 @@ h3 {
 }
 
 /*******************************
-* 4. Button Styles
-*******************************/
+ * 4. Button Styles
+ *******************************/
 /* Common button styles */
 .btn-pastel-blue,
-.btn {
-  background-color: var(--heading1-color);
-  color: #fff;
-  border: none;
-  padding: 8px 16px;
-  border-radius: 8px;
-  text-decoration: none;
-  transition: background-color 0.3s ease;
+.btn,
+.x-follow-button {
+    background-color: var(--heading1-color) !important;
+    color: #fff !important;
+    border: none !important;
+    padding: 8px 16px !important;
+    border-radius: 8px !important;
+    text-decoration: none !important;
+    transition: background-color 0.3s ease !important;
+    font-size: 16px !important;
+    font-weight: normal !important;
 }
 
 .btn-pastel-blue:hover,
-.btn:hover {
-  background-color: var(--heading2-color);
-  color: #fff;
-  text-decoration: none;
+.btn:hover,
+.x-follow-button:hover {
+    background-color: var(--heading2-color) !important;
+    color: #fff !important;
+    text-decoration: none !important;
 }
 
 /* Button group layout */
 .button-group {
-  display: flex;
-  gap: 12px;
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;  /* Align buttons to the right */
 }
 
-/* X (Twitter) button specific */
+/* X button specific */
 .x-follow-button {
-  display: inline-flex !important;
-  align-items: center;
-  gap: 8px;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    min-width: fit-content !important;
 }
 
 .x-icon {
-  width: 16px;
-  height: 16px;
+    width: 16px !important;
+    height: 16px !important;
+    fill: currentColor !important;
 }
 
 /*******************************

@@ -9,21 +9,24 @@
         <h1>{{ blog_post.title }}</h2>
         <p class="text-muted">Posted on {{ blog_post.date }} by {{ blog_post.author }}</p>
         <div class="blog-post-img-container">{{ blog_post.content|safe }}</div>
-        <!-- Display images and videos if available -->
         {% for image_url in blog_post.image_urls %}
           <div class="d-flex justify-content-center mt-3">
             <img src="{{ image_url }}" alt="Image" class="img-fluid rounded" style="max-width: 100%;">
           </div>
         {% endfor %}
+        <div class="d-flex justify-content-end mt-4">
+          <div class="button-group">
+            <a href="https://x.com/georgelindley_" target="_blank" rel="noopener noreferrer" class="btn btn-pastel-blue x-follow-button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="x-icon" aria-labelledby="xIconTitle">
+                <title id="xIconTitle">X (formerly Twitter) icon</title>
+                <path fill="currentColor" d="M16.99 0h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+              </svg>
+              Follow on X
+            </a>
+            <a href="{{ url_for('views.blog_home') }}" class="btn btn-pastel-blue">Back to All Posts</a>
+          </div>
+        </div>
       </div>
-      <div class="text-center mt-3">
-        <p><em>For questions and suggestions please get in touch @georgelindley_ on X (Twitter).</em></p>
-      </div>
-      <br>
-      <div class="text-center mt-3">
-        <a href="{{ url_for('views.blog_home') }}" class="btn btn-primary">Back to All Posts</a>
-      </div>
-      <br>
     </div>
   </div>
 </div>
